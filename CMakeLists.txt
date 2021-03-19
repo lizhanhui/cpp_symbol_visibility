@@ -8,14 +8,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 include(GenerateExportHeader)
 
-add_library(calc_object OBJECT)
-target_sources(calc_object PRIVATE Calc.cpp)
-target_include_directories(calc_object
-        PUBLIC
-            ${CMAKE_BINARY_DIR}
-            ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-add_library(calc SHARED $<TARGET_OBJECTS:calc_object>)
+add_library(calc SHARED)
+target_sources(calc PRIVATE Calc.cpp)
 target_include_directories(calc
         PUBLIC
         ${CMAKE_BINARY_DIR}
@@ -27,7 +21,8 @@ GENERATE_EXPORT_HEADER(calc
         STATIC_DEFINE CALC_STATIC)
 target_compile_definitions(calc PRIVATE CALC_EXPORTS)
 
-add_library(calc_static STATIC $<TARGET_OBJECTS:calc_object>)
+add_library(calc_static STATIC)
+target_sources(calc_static PRIVATE Calc.cpp)
 target_compile_definitions(calc_static PRIVATE CALC_STATIC)
 target_include_directories(calc_static
         PUBLIC
