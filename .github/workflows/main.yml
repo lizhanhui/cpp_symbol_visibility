@@ -32,3 +32,9 @@ jobs:
           cmakeAppendedArgs: '-G Ninja'
           cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
           cmakeListsTxtPath: ${{ github.workspace }}/CMakeLists.txt
+
+      - name: Run
+        working-directory: ${{ github.workspace }}/build/
+        shell: cmd
+        run: |
+          .\sample.exe
